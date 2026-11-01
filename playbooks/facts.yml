@@ -1,0 +1,49 @@
+---
+- name: Collect router facts
+  hosts: routers
+  gather_facts: true
+
+  tasks:
+    - name: Get FRR version
+      ansible.builtin.command: vtysh -c "show version"
+      register: frr_version
+      changed_when: false
+
+    - name: Get FRR interface summary
+      ansible.builtin.command: vtysh -c "show interface brief"
+      register: frr_interfaces
+      changed_when: false
+
+    - name: Get container uptime (process 1 start time)
+      ansible.builtin.shell: >
+        awk -v up="$(cut -d' ' -f1 /proc/uptime)" '{printf "%d", up - $22/100}' /proc/1/stat
+      register: container_uptime
+      changed_when: false
+
+    - name: Build fact summary
+      ansible.builtin.set_fact:
+        router_summary:
+          hostname: "{{ ansible_hostname }}"
+          os: "{{ ansible_distribution }} {{ ansible_distribution_version }}"
+          kernel: "{{ ansible_kernel }}"
+          frr_version: "{{ frr_version.stdout_lines | select('search', '^FRRouting') | first | default('n/a') }}"
+          host_uptime_seconds: "{{ ansible_uptime_seconds }}"
+          container_uptime_seconds: "{{ container_uptime.stdout }}"
+          interfaces: "{{ ansible_interfaces | sort }}"
+          ipv4_addresses: "{{ ansible_all_ipv4_addresses | sort }}"
+
+    - name: Show summary
+      ansible.builtin.debug:
+        var: router_summary
+
+    - name: Save facts report on control node
+      ansible.builtin.copy:
+        dest: "{{ playbook_dir }}/../facts/{{ inventory_hostname }}.txt"
+        content: |
+          # {{ inventory_hostname }}
+          {{ router_summary | to_nice_yaml }}
+          ## FRR: show interface brief
+          {{ frr_interfaces.stdout }}
+        mode: "0644"
+      delegate_to: localhost
+      become: false

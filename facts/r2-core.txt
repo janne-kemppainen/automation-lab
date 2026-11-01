@@ -1,0 +1,31 @@
+# r2-core
+container_uptime_seconds: '4103'
+frr_version: FRRouting 8.4_git (r2) on Linux(6.18.54.1-microsoft-standard-WSL2).
+host_uptime_seconds: 4122
+hostname: r2
+interfaces:
+- eth0
+- eth1
+- eth2
+- eth3
+- eth4
+- lo
+ipv4_addresses:
+- 10.10.20.1
+- 10.10.99.1
+- 10.255.12.2
+- 10.255.23.1
+- 172.20.20.4
+kernel: 6.18.54.1-microsoft-standard-WSL2
+os: Alpine 3.16.2
+
+## FRR: show interface brief
+Interface       Status  VRF             Addresses
+---------       ------  ---             ---------
+clab-ea109e4a   down    default         
+eth0            up      default         172.20.20.4/24
+eth1            up      default         10.255.12.2/30
+eth2            up      default         10.10.20.1/24
+eth3            up      default         10.10.99.1/24
+eth4            up      default         10.255.23.1/30
+lo              up      default         

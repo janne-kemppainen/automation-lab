@@ -1,0 +1,109 @@
+
+PLAY [Collect router facts] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [r3-branch]
+ok: [r1-edge]
+ok: [r2-core]
+
+TASK [Get FRR version] *********************************************************
+ok: [r3-branch]
+ok: [r2-core]
+ok: [r1-edge]
+
+TASK [Get FRR interface summary] ***********************************************
+ok: [r3-branch]
+ok: [r2-core]
+ok: [r1-edge]
+
+TASK [Get container uptime (process 1 start time)] *****************************
+ok: [r3-branch]
+ok: [r2-core]
+ok: [r1-edge]
+
+TASK [Build fact summary] ******************************************************
+ok: [r1-edge]
+ok: [r2-core]
+ok: [r3-branch]
+
+TASK [Show summary] ************************************************************
+ok: [r1-edge] => {
+    "router_summary": {
+        "container_uptime_seconds": "4103",
+        "frr_version": "FRRouting 8.4_git (r1) on Linux(6.18.54.1-microsoft-standard-WSL2).",
+        "host_uptime_seconds": 4122,
+        "hostname": "r1",
+        "interfaces": [
+            "eth0",
+            "eth1",
+            "eth2",
+            "eth3",
+            "lo"
+        ],
+        "ipv4_addresses": [
+            "10.10.10.1",
+            "10.10.10.254",
+            "10.255.12.1",
+            "172.20.20.8"
+        ],
+        "kernel": "6.18.54.1-microsoft-standard-WSL2",
+        "os": "Alpine 3.16.2"
+    }
+}
+ok: [r2-core] => {
+    "router_summary": {
+        "container_uptime_seconds": "4103",
+        "frr_version": "FRRouting 8.4_git (r2) on Linux(6.18.54.1-microsoft-standard-WSL2).",
+        "host_uptime_seconds": 4122,
+        "hostname": "r2",
+        "interfaces": [
+            "eth0",
+            "eth1",
+            "eth2",
+            "eth3",
+            "eth4",
+            "lo"
+        ],
+        "ipv4_addresses": [
+            "10.10.20.1",
+            "10.10.99.1",
+            "10.255.12.2",
+            "10.255.23.1",
+            "172.20.20.4"
+        ],
+        "kernel": "6.18.54.1-microsoft-standard-WSL2",
+        "os": "Alpine 3.16.2"
+    }
+}
+ok: [r3-branch] => {
+    "router_summary": {
+        "container_uptime_seconds": "4102",
+        "frr_version": "FRRouting 8.4_git (r3) on Linux(6.18.54.1-microsoft-standard-WSL2).",
+        "host_uptime_seconds": 4122,
+        "hostname": "r3",
+        "interfaces": [
+            "eth0",
+            "eth1",
+            "eth2",
+            "lo"
+        ],
+        "ipv4_addresses": [
+            "10.10.30.1",
+            "10.255.23.2",
+            "172.20.20.13"
+        ],
+        "kernel": "6.18.54.1-microsoft-standard-WSL2",
+        "os": "Alpine 3.16.2"
+    }
+}
+
+TASK [Save facts report on control node] ***************************************
+changed: [r2-core -> localhost]
+changed: [r3-branch -> localhost]
+changed: [r1-edge -> localhost]
+
+PLAY RECAP *********************************************************************
+r1-edge                    : ok=7    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+r2-core                    : ok=7    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+r3-branch                  : ok=7    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

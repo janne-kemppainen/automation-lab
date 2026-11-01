@@ -1,0 +1,27 @@
+# r1-edge
+container_uptime_seconds: '4103'
+frr_version: FRRouting 8.4_git (r1) on Linux(6.18.54.1-microsoft-standard-WSL2).
+host_uptime_seconds: 4122
+hostname: r1
+interfaces:
+- eth0
+- eth1
+- eth2
+- eth3
+- lo
+ipv4_addresses:
+- 10.10.10.1
+- 10.10.10.254
+- 10.255.12.1
+- 172.20.20.8
+kernel: 6.18.54.1-microsoft-standard-WSL2
+os: Alpine 3.16.2
+
+## FRR: show interface brief
+Interface       Status  VRF             Addresses
+---------       ------  ---             ---------
+eth0            up      default         172.20.20.8/24
+eth1            up      default         10.255.12.1/30
+eth2            up      default         10.10.10.1/24
+eth3            up      default         10.10.10.254/24
+lo              up      default         

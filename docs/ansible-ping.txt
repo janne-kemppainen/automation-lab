@@ -1,0 +1,12 @@
+r3-branch | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+r2-core | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+r1-edge | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}

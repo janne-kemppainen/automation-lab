@@ -1,0 +1,9 @@
+== r1
+chpasswd: password for 'netadmin' changed
+SSH valmis: r1
+== r2
+chpasswd: password for 'netadmin' changed
+SSH valmis: r2
+== r3
+chpasswd: password for 'netadmin' changed
+SSH valmis: r3

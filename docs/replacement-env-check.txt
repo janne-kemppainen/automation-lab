@@ -1,0 +1,96 @@
+## containerlab inspect
+╭────────────────────────────────────┬────────────────────────────┬───────────────────────────────────────────────┬─────────────────────────────────────────────┬───────────┬────────────────╮
+│              Topology              │          Lab Name          │                      Name                     │                  Kind/Image                 │   State   │ IPv4/6 Address │
+├────────────────────────────────────┼────────────────────────────┼───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│ topology/golden.student01.clab.yml │ hamk-verkonhallinta-golden │ clab-hamk-verkonhallinta-golden-ansible       │ linux                                       │ running   │ 172.20.20.7    │
+│                                    │                            │                                               │ ubuntu:24.04                                │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-attacker      │ linux                                       │ running   │ 172.20.20.6    │
+│                                    │                            │                                               │ clab-persist-student01-attacker:latest      │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-branch-client │ linux                                       │ running   │ 172.20.20.16   │
+│                                    │                            │                                               │ clab-persist-student01-branch-client:latest │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-cadvisor      │ linux                                       │ running   │ 172.20.20.11   │
+│                                    │                            │                                               │ gcr.io/cadvisor/cadvisor:v0.49.1            │ (healthy) │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-client1       │ linux                                       │ running   │ 172.20.20.15   │
+│                                    │                            │                                               │ clab-persist-student01-client1:latest       │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-db1           │ linux                                       │ running   │ 172.20.20.2    │
+│                                    │                            │                                               │ clab-persist-student01-db1:latest           │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-grafana       │ linux                                       │ running   │ 172.20.20.12   │
+│                                    │                            │                                               │ grafana/grafana:latest                      │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-mgmt-bp       │ linux                                       │ running   │ 172.20.20.10   │
+│                                    │                            │                                               │ alpine:latest                               │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-prometheus    │ linux                                       │ running   │ 172.20.20.9    │
+│                                    │                            │                                               │ prom/prometheus:latest                      │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-r1            │ linux                                       │ running   │ 172.20.20.8    │
+│                                    │                            │                                               │ frrouting/frr:latest                        │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-r2            │ linux                                       │ running   │ 172.20.20.4    │
+│                                    │                            │                                               │ frrouting/frr:latest                        │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-r3            │ linux                                       │ running   │ 172.20.20.13   │
+│                                    │                            │                                               │ frrouting/frr:latest                        │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-srv-bp        │ linux                                       │ running   │ 172.20.20.5    │
+│                                    │                            │                                               │ alpine:latest                               │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-syslog        │ linux                                       │ running   │ 172.20.20.50   │
+│                                    │                            │                                               │ rsyslog/syslog_appliance_alpine             │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-web1          │ linux                                       │ running   │ 172.20.20.3    │
+│                                    │                            │                                               │ clab-persist-student01-web1:latest          │           │ N/A            │
+│                                    │                            ├───────────────────────────────────────────────┼─────────────────────────────────────────────┼───────────┼────────────────┤
+│                                    │                            │ clab-hamk-verkonhallinta-golden-zabbix        │ linux                                       │ running   │ 172.20.20.14   │
+│                                    │                            │                                               │ zabbix/zabbix-appliance:latest              │           │ N/A            │
+╰────────────────────────────────────┴────────────────────────────┴───────────────────────────────────────────────┴─────────────────────────────────────────────┴───────────┴────────────────╯
+
+########## r1
+NAME="Alpine Linux"
+ID=alpine
+python3: /usr/bin/python3
+sshd: puuttuu
+vtysh: /usr/bin/vtysh
+apk: /sbin/apk
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+eth0@if22        UP             172.20.20.8/24 fe80::42:acff:fe14:1408/64 
+eth1@if30        UP             10.255.12.1/30 fe80::a8c1:abff:fece:df2f/64 
+eth3@if38        UP             10.10.10.254/24 fe80::a8c1:abff:fe4e:9988/64 
+eth2@if45        UP             10.10.10.1/24 fe80::a8c1:abff:fe05:3bc4/64 
+
+########## r2
+NAME="Alpine Linux"
+ID=alpine
+python3: /usr/bin/python3
+sshd: puuttuu
+vtysh: /usr/bin/vtysh
+apk: /sbin/apk
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+eth0@if14        UP             172.20.20.4/24 fe80::42:acff:fe14:1404/64 
+eth1@if29        UP             10.255.12.2/30 fe80::a8c1:abff:fe0a:6698/64 
+eth4@if31        UP             10.255.23.1/30 fe80::a8c1:abff:fefe:339a/64 
+eth2@if35        UP             10.10.20.1/24 fe80::a8c1:abff:fe2f:b5fb/64 
+eth3@if39        UP             10.10.99.1/24 fe80::a8c1:abff:fee6:d693/64 
+
+########## r3
+NAME="Alpine Linux"
+ID=alpine
+python3: /usr/bin/python3
+sshd: puuttuu
+vtysh: /usr/bin/vtysh
+apk: /sbin/apk
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+eth1@if32        UP             10.255.23.2/30 fe80::a8c1:abff:fe4b:ba14/64 
+eth0@if56        UP             172.20.20.13/24 fe80::42:acff:fe14:140d/64 
+eth2@if59        UP             10.10.30.1/24 fe80::a8c1:abff:fe0a:e3aa/64 
+
+## Nimien ratkeaminen WSL:ssä
+172.20.20.8     clab-hamk-verkonhallinta-golden-r1 11325958ce8b
+172.20.20.4     clab-hamk-verkonhallinta-golden-r2 041814b42f40
+172.20.20.13    clab-hamk-verkonhallinta-golden-r3 c31b0612cedf

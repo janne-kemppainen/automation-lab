@@ -1,0 +1,6 @@
+@all:
+  |--@ungrouped:
+  |--@routers:
+  |  |--r1-edge
+  |  |--r2-core
+  |  |--r3-branch

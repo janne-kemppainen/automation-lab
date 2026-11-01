@@ -1,0 +1,18 @@
+
+PLAY [Backup router configurations] ********************************************
+
+TASK [Read running configuration] **********************************************
+ok: [r3-branch]
+ok: [r2-core]
+ok: [r1-edge]
+
+TASK [Save configuration on control node] **************************************
+changed: [r2-core -> localhost]
+changed: [r3-branch -> localhost]
+changed: [r1-edge -> localhost]
+
+PLAY RECAP *********************************************************************
+r1-edge                    : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+r2-core                    : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+r3-branch                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
