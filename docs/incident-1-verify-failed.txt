@@ -1,0 +1,48 @@
+
+PLAY [Verify routers are reachable and routing works] **************************
+
+TASK [Check management connection] *********************************************
+ok: [r3-branch]
+ok: [r2-core]
+ok: [r1-edge]
+
+TASK [Read OSPF neighbors] *****************************************************
+ok: [r3-branch]
+ok: [r2-core]
+ok: [r1-edge]
+
+TASK [Assert OSPF adjacency is up] *********************************************
+ok: [r1-edge] => {
+    "changed": false,
+    "msg": "r1-edge: OSPF neighbors OK (1 Full)"
+}
+ok: [r2-core] => {
+    "changed": false,
+    "msg": "r2-core: OSPF neighbors OK (2 Full)"
+}
+ok: [r3-branch] => {
+    "changed": false,
+    "msg": "r3-branch: OSPF neighbors OK (1 Full)"
+}
+
+PLAY [Verify branch loopback configuration] ************************************
+
+TASK [Read kernel addresses on loopback] ***************************************
+ok: [r3-branch]
+
+TASK [Read FRR running configuration] ******************************************
+ok: [r3-branch]
+
+TASK [Assert loopback state] ***************************************************
+fatal: [r3-branch]: FAILED! => {
+    "assertion": "('inet ' ~ lo_address) in kernel_lo.stdout",
+    "changed": false,
+    "evaluated_to": false,
+    "msg": "lo10 is not in the expected state (192.0.2.3/32)"
+}
+
+PLAY RECAP *********************************************************************
+r1-edge                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+r2-core                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+r3-branch                  : ok=5    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
