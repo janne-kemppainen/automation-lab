@@ -1,0 +1,44 @@
+---
+- name: Configure branch loopback interface
+  hosts: r3-branch
+  gather_facts: false
+
+  tasks:
+    - name: Ensure kernel interface exists and is up
+      ansible.builtin.shell: |
+        changed=0
+        if ! ip link show {{ lo_name }} >/dev/null 2>&1; then
+          ip link add {{ lo_name }} type dummy
+          changed=1
+        fi
+        if ! ip link show {{ lo_name }} | grep -q '<.*UP.*>'; then
+          ip link set {{ lo_name }} up
+          changed=1
+        fi
+        echo "$changed"
+      register: lo_link
+      changed_when: lo_link.stdout == "1"
+
+    - name: Read current IPv4 addresses on loopback
+      ansible.builtin.command: ip -4 -o addr show dev {{ lo_name }}
+      register: lo_addrs
+      changed_when: false
+
+    - name: Remove unexpected addresses from loopback
+      ansible.builtin.command: >
+        vtysh -c "configure terminal"
+              -c "interface {{ lo_name }}"
+              -c "no ip address {{ item }}"
+      loop: '{{ lo_addrs.stdout | regex_findall("inet (\S+)") | reject("equalto", lo_address) | list }}'
+
+    - name: Read running configuration
+      ansible.builtin.command: vtysh -c "show running-config"
+      register: running_config
+      changed_when: false
+
+    - name: Configure loopback address in FRR
+      ansible.builtin.command: >
+        vtysh -c "configure terminal"
+              -c "interface {{ lo_name }}"
+              -c "ip address {{ lo_address }}"
+      when: lo_frr_block not in running_config.stdout

@@ -1,0 +1,21 @@
+
+PLAY [Configure branch loopback interface] *************************************
+
+TASK [Ensure kernel interface exists and is up] ********************************
+changed: [r3-branch]
+
+TASK [Read current IPv4 addresses on loopback] *********************************
+ok: [r3-branch]
+
+TASK [Remove unexpected addresses from loopback] *******************************
+skipping: [r3-branch]
+
+TASK [Read running configuration] **********************************************
+ok: [r3-branch]
+
+TASK [Configure loopback address in FRR] ***************************************
+changed: [r3-branch]
+
+PLAY RECAP *********************************************************************
+r3-branch                  : ok=4    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+

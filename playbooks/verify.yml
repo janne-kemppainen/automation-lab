@@ -1,0 +1,46 @@
+---
+- name: Verify routers are reachable and routing works
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Check management connection
+      ansible.builtin.ping:
+
+    - name: Read OSPF neighbors
+      ansible.builtin.command: vtysh -c "show ip ospf neighbor"
+      register: ospf_neighbors
+      changed_when: false
+
+    - name: Assert OSPF adjacency is up
+      ansible.builtin.assert:
+        that:
+          - "'Full' in ospf_neighbors.stdout"
+        fail_msg: "{{ inventory_hostname }}: no OSPF neighbor in Full state"
+        success_msg: "{{ inventory_hostname }}: OSPF neighbors OK ({{ ospf_neighbors.stdout | regex_findall('Full') | length }} Full)"
+
+- name: Verify branch loopback configuration
+  hosts: r3-branch
+  gather_facts: false
+
+  tasks:
+    - name: Read kernel addresses on loopback
+      ansible.builtin.command: ip -4 -o addr show dev {{ lo_name }}
+      register: kernel_lo
+      changed_when: false
+      failed_when: false
+
+    - name: Read FRR running configuration
+      ansible.builtin.command: vtysh -c "show running-config"
+      register: running_config
+      changed_when: false
+
+    - name: Assert loopback state
+      ansible.builtin.assert:
+        that:
+          - kernel_lo.rc == 0
+          - "('inet ' ~ lo_address) in kernel_lo.stdout"
+          - 'kernel_lo.stdout | regex_findall("inet (\S+)") | length == 1'
+          - lo_frr_block in running_config.stdout
+        fail_msg: "{{ lo_name }} is not in the expected state ({{ lo_address }})"
+        success_msg: "{{ lo_name }} exists with exactly {{ lo_address }} in kernel and FRR"

@@ -1,0 +1,3 @@
+lo_name: lo10
+lo_address: 192.0.2.3/32
+lo_frr_block: "interface {{ lo_name }}\n ip address {{ lo_address }}"
